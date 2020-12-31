@@ -1,6 +1,5 @@
 from GraphInterface import GraphInterface
-from NodeData import NodeData
-
+import src.node as data
 
 class DiGraph(GraphInterface):
 
@@ -32,27 +31,28 @@ class DiGraph(GraphInterface):
         return self.mC
 
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
-        if id1 in self.nodes and id2 in self.nodes:
-            if id2 in self.edges[id1]:
-                self.edges[id1][id2] = weight
-                return False
-            if id1 in self.outE:
-                self.outE[id1][id2] = weight
-            else:
-                self.outE[id1] = dict()
-                self.outE[id1][id2] = weight
-            if id2 in self.inE:
-                self.inE[id2][id1] = weight
-            else:
-                self.inE[id2] = dict()
-                self.inE[id2][id1] = weight
-            self.sizeE += 1
-            self.mC += 1
-            return True
+        if id1 not in self.nodes.keys() or id2 not in self.nodes.keys():
+            return False
+        if id2 in self.edges[id1].keys():
+            return False
+        self.edges[id1][id2] = weight
+        if id1 in self.outE:
+            self.outE[id1][id2] = weight
+        else:
+            self.outE[id1] = dict()
+            self.outE[id1][id2] = weight
+        if id2 in self.inE:
+            self.inE[id2][id1] = weight
+        else:
+            self.inE[id2] = dict()
+            self.inE[id2][id1] = weight
+        self.sizeE += 1
+        self.mC += 1
+        return True
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id not in self.nodes:
-            self.nodes[node_id] = NodeData(node_id, pos)
+            self.nodes[node_id] = data.NodeData(node_id, pos)
             self.edges[node_id] = dict()
             self.mC += 1
             self.sizeV += 1
@@ -62,26 +62,30 @@ class DiGraph(GraphInterface):
     def remove_node(self, node_id: int) -> bool:
         if node_id in self.nodes.keys():
             for n in self.inE.keys():
-                if node_id in self.inE[n]:
+                if node_id in self.inE[n].keys():
                     del self.inE[n][node_id]
                     self.sizeE -= 1
             for n in self.outE.keys():
-                if node_id in self.outE[n]:
+                if node_id in self.outE[n].keys():
                     del self.outE[n][node_id]
                     self.sizeE -= 1
             del self.nodes[node_id]
-            del self.inE[node_id]
-            del self.outE[node_id]
+            del self.edges[node_id]
+            if node_id in self.inE.keys():
+                del self.inE[node_id]
+            if node_id in self.inE.keys():
+                del self.outE[node_id]
             self.sizeV -= 1
             self.mC += 1
             return True
         return False
 
     def remove_edge(self, node_id1: int, node_id2: int) -> bool:
-        if node_id1 in self.edges[node_id2] or node_id2 in self.edges[node_id1]:
+        if node_id2 in self.edges[node_id1].keys():
             del self.edges[node_id1][node_id2]
-            del self.inE[node_id2][node_id1]
             del self.outE[node_id1][node_id2]
-            self.mC += 1
+            del self.inE[node_id2][node_id1]
             self.sizeE -= 1
-        return True
+            self.mC += 1
+            return True
+        return False
