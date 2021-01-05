@@ -14,17 +14,17 @@ In this project we presents an implementation of a directed weighted graph using
 ## DiGraph:
 
 ### Objects:
-nodes - Dictionary of nodes in the graph.
+**nodes** - Dictionary of nodes in the graph.
 
-edges - Dictionary of all the edges in the graph.
+**edges** - Dictionary of all the edges in the graph.
 
-inE - Dictionary of all the nodes that that get an edge from other node.
+**inE** - Dictionary of all the nodes that that get an edge from other node.
 
-outE = Dictionary of all the nodes that com out to other node.
+**outE** - Dictionary of all the nodes that com out to other node.
 
-sizeV - The number of nodes in the graph.
+**sizeV** - The number of nodes in the graph.
 
-sizeE - The number of edges in the graph.
+**sizeE** - The number of edges in the graph.
 
 | Main methods | Explanation |
 |------------  | ------------|
