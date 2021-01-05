@@ -1,6 +1,7 @@
 from GraphInterface import GraphInterface
 import src.node as data
 
+
 class DiGraph(GraphInterface):
 
     def __init__(self):
@@ -36,16 +37,12 @@ class DiGraph(GraphInterface):
         if id2 in self.edges[id1].keys():
             return False
         self.edges[id1][id2] = weight
-        if id1 in self.outE:
-            self.outE[id1][id2] = weight
-        else:
+        if id1 not in self.outE:
             self.outE[id1] = dict()
-            self.outE[id1][id2] = weight
-        if id2 in self.inE:
-            self.inE[id2][id1] = weight
-        else:
+        self.outE[id1][id2] = weight
+        if id2 not in self.inE:
             self.inE[id2] = dict()
-            self.inE[id2][id1] = weight
+        self.inE[id2][id1] = weight
         self.sizeE += 1
         self.mC += 1
         return True
