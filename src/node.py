@@ -1,6 +1,6 @@
 class NodeData:
 
-    def __init__(self, key: int, location: tuple = None):
+    def __init__(self, key: int, location: None):
         self.key = key
         self.location = location
         self.weight = 0.0
@@ -22,4 +22,14 @@ class NodeData:
 
     def __hash__(self):
         return self.key
+
+
+    def get_key(self) -> int:
+        return self.key
+
+    def set_weight(self, w: double) -> None:
+        self.weight = s
+
+    def get_weight(self) -> double:
+        return self.weight
 

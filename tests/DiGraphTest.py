@@ -9,10 +9,11 @@ def set_DiGraph_random():
         g.add_node(n)
     for n in range(30):
         n1 = n
-        n2 = n+1
+        n2 = n + 1
         weight = random.randint(0, 50)
         g.add_edge(n1, n2, weight)
     return g
+
 
 def set_Digraph():
     g = DiGraph()
@@ -27,6 +28,7 @@ def set_Digraph():
     g.add_edge(2, 3, 2)
     g.add_edge(3, 1, 8)
     return g
+
 
 class MyTestCase(unittest.TestCase):
 
