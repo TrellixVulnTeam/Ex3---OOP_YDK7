@@ -4,6 +4,7 @@ from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from queue import PriorityQueue
 from PriorityNode import PriorityNode
+from src.node import NodeData
 from GraphInterface import GraphInterface
 
 
@@ -13,9 +14,17 @@ class GraphAlgo(GraphAlgoInterface):
         self.g = DiGraph()
 
     def get_graph(self) -> GraphInterface:
+        """
+        :return: the directed graph on which the algorithm works on.
+        """
         return self.g
 
     def load_from_json(self, file_name: str) -> bool:
+        """
+        Loads a graph from a json file.
+        @param file_name: The path to the json file
+        @returns True if the loading was successful, False o.w.
+        """
         try:
             with open(file_name) as file:
                 self.g = DiGraph()
@@ -40,6 +49,11 @@ class GraphAlgo(GraphAlgoInterface):
         return False
 
     def save_to_json(self, file_name: str) -> bool:
+        """
+       Saves the graph in JSON format to a file
+       @param file_name: The path to the out file
+       @return: True if the save was successful, Flase o.w.
+       """
         save = dict()
         save["Nodes"] = list()
         save["Edges"] = list()
@@ -148,10 +162,25 @@ class GraphAlgo(GraphAlgoInterface):
         return distance, path
 
     def connected_component(self, id1: int) -> list:
+        """
+        Finds the Strongly Connected Component(SCC) that node id1 is a part of.
+        @param id1: The node id
+        @return: The list of nodes in the SCC
+        """
         pass
 
     def connected_components(self) -> List[list]:
+        """
+        Finds all the Strongly Connected Component(SCC) in the graph.
+        @return: The list all SCC
+        """
         pass
 
     def plot_graph(self) -> None:
+        """
+       Plots the graph.
+       If the nodes have a position, the nodes will be placed there.
+       Otherwise, they will be placed in a random but elegant manner.
+       @return: None
+       """
         pass
