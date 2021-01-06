@@ -23,13 +23,11 @@ class NodeData:
     def __hash__(self):
         return self.key
 
-
     def get_key(self) -> int:
         return self.key
 
-    def set_weight(self, w: double) -> None:
-        self.weight = s
+    def set_weight(self, w: float) -> None:
+        self.weight = w
 
-    def get_weight(self) -> double:
+    def get_weight(self) -> float:
         return self.weight
-

@@ -1,6 +1,5 @@
 import unittest
 
-from DiGraph import DiGraph
 from GraphAlgo import GraphAlgo
 
 
@@ -31,7 +30,16 @@ class MyTestCase(unittest.TestCase):
         g1 = ga1.get_graph()
         self.assertEqual(g, g1)
 
-
+    def test_shortest_dist(self):
+        graph = GraphAlgo()
+        graph.get_graph().add_node(0)
+        graph.get_graph().add_node(1)
+        graph.get_graph().add_node(2)
+        graph.get_graph().add_node(3)
+        graph.get_graph().add_edge(0, 1, 3)
+        graph.get_graph().add_edge(0, 2, 10)
+        graph.get_graph().add_edge(1, 2, 4)
+        self.assertEqual(graph.shortest_path_dist(0, 2), 7)
 
 if __name__ == '__main__':
     unittest.main()

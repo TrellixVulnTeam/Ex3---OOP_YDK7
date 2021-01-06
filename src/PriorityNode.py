@@ -1,14 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any
 from src.node import NodeData
 
 
 @dataclass(order=True)
 class PriorityNode:
-    priority: double
+    priority: float
     item: NodeData = field(compare=False)
 
-    def __init__(self, weight: double, node: NodeData):
+    def __init__(self, weight: float, node: NodeData):
         self.priority = weight
         self.item = node
 

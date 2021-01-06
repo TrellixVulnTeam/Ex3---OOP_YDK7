@@ -1,5 +1,5 @@
+from src.node import NodeData
 from GraphInterface import GraphInterface
-import src.node as data
 
 
 class DiGraph(GraphInterface):
@@ -49,7 +49,7 @@ class DiGraph(GraphInterface):
 
     def add_node(self, node_id: int, pos: tuple = None) -> bool:
         if node_id not in self.nodes:
-            self.nodes[node_id] = data.NodeData(node_id, pos)
+            self.nodes[node_id] = NodeData(node_id, pos)
             self.edges[node_id] = dict()
             self.mC += 1
             self.sizeV += 1
@@ -60,18 +60,20 @@ class DiGraph(GraphInterface):
         if node_id in self.nodes.keys():
             for n in self.inE.keys():
                 if node_id in self.inE[n].keys():
-                    del self.inE[n][node_id]
-                    self.sizeE -= 1
+                    # del self.inE[n][node_id]
+                    # self.sizeE -= 1
+                    self.remove_edge(node_id, n)
             for n in self.outE.keys():
                 if node_id in self.outE[n].keys():
-                    del self.outE[n][node_id]
-                    self.sizeE -= 1
+                    # del self.outE[n][node_id]
+                    # self.sizeE -= 1
+                    self.remove_edge(n, node_id)
             del self.nodes[node_id]
             del self.edges[node_id]
-            if node_id in self.inE.keys():
-                del self.inE[node_id]
-            if node_id in self.inE.keys():
-                del self.outE[node_id]
+            # if node_id in self.inE.keys():
+            #     del self.inE[node_id]
+            # if node_id in self.inE.keys():
+            #     del self.outE[node_id]
             self.sizeV -= 1
             self.mC += 1
             return True
