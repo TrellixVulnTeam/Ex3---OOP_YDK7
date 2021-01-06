@@ -4,7 +4,6 @@ from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
 from queue import PriorityQueue
 from PriorityNode import PriorityNode
-from src.node import NodeData
 from GraphInterface import GraphInterface
 
 
