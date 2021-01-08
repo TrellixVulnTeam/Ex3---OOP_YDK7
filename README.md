@@ -10,6 +10,10 @@ In this project we presents an implementation of a directed weighted graph using
 This class is an auxiliary class for DiGraph and GraphAlgo classes.
 
 ## DiGraph:
+This class implements a directed weighted graph.
+
+
+![Example for a DiGraph:](https://ucarecdn.com/d624d487-da51-42ad-a520-cc3fb8f253bd/)
 
 ### Objects:
 **nodes** - Dictionary of nodes in the graph.
