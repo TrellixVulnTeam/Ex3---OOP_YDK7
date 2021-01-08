@@ -42,6 +42,8 @@ This class implements a directed weighted graph.
 | remove_edge(self, node_id1: int, node_id2: int) -> bool | Remove edge between two nodes, return true if it success, else return false. |
 
 ## GraphAlgo:
+This class implements algorithms of a DiGraph.
+
 **g** - A DiGraph.
 
 | Main methods | Explanation |
@@ -52,4 +54,8 @@ This class implements a directed weighted graph.
 | def shortest_path(self, id1: int, id2: int) -> (float, list) | This method calculate the shortest path from one node to other node, using Dijkstra's algorithm. |
 | def connected_component(self, id1: int) -> list | This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC. |
 | def connected_components(self) -> List[list] | This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC. |
+
+### Dijkstra's Algorithm:
+
+![dWtprX5](https://user-images.githubusercontent.com/73074680/104013765-988bd580-51ba-11eb-9d11-524e8431ece6.gif)
 
