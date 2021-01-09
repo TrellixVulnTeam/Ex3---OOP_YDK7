@@ -30,7 +30,7 @@ def set_Digraph():
     return g
 
 
-class MyTestCase(unittest.TestCase):
+class DiGraphTest(unittest.TestCase):
 
     def test_v_size(self):
         g = set_Digraph()
@@ -71,6 +71,17 @@ class MyTestCase(unittest.TestCase):
         g.remove_edge(0, 3)
         self.assertEqual(4, g.e_size())
         self.assertEqual(12, g.get_mc())
+
+    def set_DiGraph_random(self) -> DiGraph:
+        g = DiGraph()
+        for n in range(30):
+            g.add_node(n)
+        for n in range(30):
+            n1 = n
+            n2 = n + 1
+            weight = random.randint(0, 50)
+            g.add_edge(n1, n2, weight)
+        return g
 
 
 if __name__ == '__main__':
