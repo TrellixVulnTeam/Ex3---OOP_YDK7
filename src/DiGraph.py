@@ -37,13 +37,19 @@ class DiGraph(GraphInterface):
         """return a dictionary of all the nodes connected to (into) node_id ,
         each node is represented using a pair (key, weight)
          """
-        return self.inE[id1]
+        if id1 in self.inE.keys():
+            return self.inE[id1]
+        else:
+            return None
 
     def all_out_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected from node_id , each node is represented using a pair (key,
         weight)
         """
-        return self.outE[id1]
+        if id1 in self.outE.keys():
+            return self.outE[id1]
+        else:
+            return None
 
     def get_mc(self) -> int:
         """

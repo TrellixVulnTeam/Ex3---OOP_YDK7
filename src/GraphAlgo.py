@@ -92,8 +92,10 @@ class GraphAlgo(GraphAlgoInterface):
         min_weight = nodes[id1].get_weight()
         min_key = id1
         for n in neighs.keys():
-            if nodes[n].get_weight() < min_weight and nodes[n].get_weight() != -1:
-                min_key = n
+            if nodes[n].get_weight() != -1:
+                if nodes[n].get_weight() < min_weight and nodes[n].get_weight() + neighs[n] == nodes[id1].get_weight():
+                    min_key = n
+                    min_weight = nodes[n].get_weight()
         return min_key
 
     def shortest_path_dist(self, id1: int, id2: int) -> float:
@@ -109,10 +111,12 @@ class GraphAlgo(GraphAlgoInterface):
             return -1
         if id1 == id2:
             return 0
+        edges = self.g.all_out_edges_of_node(id1)
+        if edges is None:
+            return -1
         self.reset_weights_to(-1)
         nodes[id1].set_weight(0)
         neighs = PriorityQueue()
-        edges = self.g.all_out_edges_of_node(id1)
         for n in edges.keys():
             nodes[n].set_weight(edges[n])
             neighs.put(PriorityNode(nodes[n].get_weight(), nodes[n]))
@@ -122,10 +126,11 @@ class GraphAlgo(GraphAlgoInterface):
             if node == nodes[id2]:
                 return nodes[id2].get_weight()
             edges = self.g.all_out_edges_of_node(node.get_key())
-            for i in edges.keys():
-                if nodes[i].get_weight() == -1 or edges[i] + node.get_weight() < nodes[i].get_weight():
-                    nodes[i].set_weight(edges[i] + node.get_weight())
-                    neighs.put(PriorityNode(nodes[i].get_weight(), nodes[i]))
+            if edges is not None:
+                for i in edges.keys():
+                    if nodes[i].get_weight() == -1 or edges[i] + node.get_weight() < nodes[i].get_weight():
+                        nodes[i].set_weight(edges[i] + node.get_weight())
+                        neighs.put(PriorityNode(nodes[i].get_weight(), nodes[i]))
         return nodes[id2].get_weight()
 
     def shortest_path(self, id1: int, id2: int) -> (float, list):
@@ -152,9 +157,7 @@ class GraphAlgo(GraphAlgoInterface):
             path_mirror.append(curr)
             curr = self.min_neighbor(curr)
         path_mirror.append(curr)
-        path = []
-        for x in path_mirror:
-            path.append(path_mirror.remove(x))
+        path = list(reversed(path_mirror))
         return distance, path
 
     def connected_component(self, id1: int) -> list:
@@ -182,7 +185,11 @@ class GraphAlgo(GraphAlgoInterface):
         all_connected = []
         for n in nodes.keys():
             neighs = self.connected_component(n)
-            all_connected.append(neighs)
+            for x in all_connected:
+                if n in x and n in neighs:
+                    neighs = None
+            if neighs is not None:
+                all_connected.append(neighs)
         return all_connected
 
     def plot_graph(self) -> None:
