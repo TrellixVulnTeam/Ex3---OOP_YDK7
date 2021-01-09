@@ -7,11 +7,13 @@ In this project we presents an implementation of a directed weighted graph using
 
 ## NodeData:
 
-| Main methods | Explanation |
-|------------  | ------------|
-| 
+This class is an auxiliary class for DiGraph and GraphAlgo classes.
 
 ## DiGraph:
+This class implements a directed weighted graph.
+
+
+![Example for a DiGraph:](https://ucarecdn.com/d624d487-da51-42ad-a520-cc3fb8f253bd/)
 
 ### Objects:
 **nodes** - Dictionary of nodes in the graph.
@@ -40,9 +42,20 @@ In this project we presents an implementation of a directed weighted graph using
 | remove_edge(self, node_id1: int, node_id2: int) -> bool | Remove edge between two nodes, return true if it success, else return false. |
 
 ## GraphAlgo:
+This class implements algorithms of a DiGraph.
+
+**g** - A DiGraph.
 
 | Main methods | Explanation |
 |------------  | -------------|
 | get_graph(self) -> GraphInterface  | This method return the directed graph on which the algorithm works on.             |
-| load_from_json(self, file_name: str) -> bool| This method loads a graph from a json file, return True if the loading was successful, False o.w.               |
-|
+| load_from_json(self, file_name: str) -> bool| This method loads a graph from a json file, return True if the loading was successful, False o.w. |
+| save_to_json(self, file_name: str) -> bool | This method saves the graph in JSON format to a file, return True if the save was successful, False o.w. |
+| def shortest_path(self, id1: int, id2: int) -> (float, list) | This method calculate the shortest path from one node to other node, using Dijkstra's algorithm. |
+| def connected_component(self, id1: int) -> list | This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC. |
+| def connected_components(self) -> List[list] | This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC. |
+
+### Dijkstra's Algorithm:
+
+![dWtprX5](https://user-images.githubusercontent.com/73074680/104013765-988bd580-51ba-11eb-9d11-524e8431ece6.gif)
+
