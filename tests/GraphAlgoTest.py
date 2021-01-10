@@ -1,9 +1,7 @@
 import unittest
 import random
 
-from DiGraph import DiGraph
 from GraphAlgo import GraphAlgo
-from DiGraphTest import DiGraphTest as dg
 
 def setUp1():
     ga = GraphAlgo()

@@ -29,7 +29,8 @@ class DiGraph(GraphInterface):
         return self.sizeE
 
     def get_all_v(self) -> dict:
-        """return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
+        """
+        return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
         """
         return self.nodes
 
