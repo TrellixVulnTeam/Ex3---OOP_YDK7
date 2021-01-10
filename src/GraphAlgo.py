@@ -1,10 +1,17 @@
 import json
+import math
 from typing import List
+import random
+
+import numpy as np
+
 from GraphAlgoInterface import GraphAlgoInterface
 from DiGraph import DiGraph
+from GraphInterface import GraphInterface
 from queue import PriorityQueue
 from PriorityNode import PriorityNode
 from GraphInterface import GraphInterface
+import matplotlib.pyplot as plt
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -24,28 +31,27 @@ class GraphAlgo(GraphAlgoInterface):
         @param file_name: The path to the json file
         @returns True if the loading was successful, False o.w.
         """
-        try:
+        if self.g is not None:
             with open(file_name) as file:
                 self.g = DiGraph()
                 g_f = json.load(file)
-                nodes_load = g_f.get('Nodes')
-                edges_load = g_f.get('Edges')
+                nodes_load = g_f.get("Nodes")
+                edges_load = g_f.get("Edges")
                 for node in nodes_load:
-                    if node.get('pos') is None:
-                        self.g.add_node(node.get('id'))
+                    if node.get("pos") is None:
+                        self.g.add_node(node.get("id"))
                     else:
-                        position = str(node.get('pos')).split(",")
-                        position1 = (float(position[0]), float(position[1]), 0.0)
-                        self.g.add_node(node.get('id'), position1)
+                        position = str(node.get("pos")).split(",")
+                        position1 = ((position[0]), float(position[1]), 0.0)
+                        self.g.add_node(node.get("id"), position1)
                 for edge in edges_load:
-                    src = edge.get('src')
-                    w = edge.get('w')
-                    dest = edge.get('dest')
+                    src = edge.get("src")
+                    w = edge.get("w")
+                    dest = edge.get("dest")
                     self.g.add_edge(src, dest, w)
                 return True
-        except FileNotFoundError as fileNotFound:
-            print(fileNotFound)
-        return False
+        else:
+            return False
 
     def save_to_json(self, file_name: str) -> bool:
         """
@@ -53,24 +59,25 @@ class GraphAlgo(GraphAlgoInterface):
        @param file_name: The path to the out file
        @return: True if the save was successful, False o.w.
        """
-        save = dict()
-        save["Nodes"] = list()
-        save["Edges"] = list()
-        for node in self.g.nodes.items():
-            if node.location is None:
-                pos = '0.0,0.0,0.0'
-            else:
-                pos = str(node.location[0]) + ',' + str(node.location[1]) + ',' + str(0.0)
-            save["Nodes"].append({"pos": pos, "id": node.key})
-            for key, w in node.outE.items():
-                save["Edges"].append({"src": node.key, "w": w, "dest": key})
-        try:
-            with open(file_name, 'f') as file:
+        with open(file_name, 'w') as file:
+            if self.g is not None:
+                save = dict()
+                save["Edges"] = list();
+                save["Nodes"] = list()
+
+                for n in self.g.nodes.values():
+                    if n.position is not None:
+                        save["Nodes"].append({"pos": n.position, "id": n.key})
+                    else:
+                        save["Nodes"].append({"id": n.key})
+
+                for s in self.g.outE.keys():
+                    for d, w in self.g.all_out_edges_of_node(s).items():
+                        save["Edges"].append({"src": s, "w": w, "dest": d})
                 json.dump(save, file)
-        except IOError as e:
-            print(e)
-            return False
-        return True
+                return True
+            else:
+                return False
 
     def reset_weights_to(self, prm: float) -> None:
         """
