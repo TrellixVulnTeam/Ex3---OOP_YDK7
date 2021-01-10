@@ -54,7 +54,7 @@ This class implements algorithms of a DiGraph.
 | def shortest_path(self, id1: int, id2: int) -> (float, list) | This method calculate the shortest path from one node to other node, using Dijkstra's algorithm. |
 | def connected_component(self, id1: int) -> list | This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC. |
 | def connected_components(self) -> List[list] | This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC. |
-| def plot_graph(self) -> None | This method plots the graph, if the nodes have a position, the nodes will be placed there, otherwise, they will be placed in a random but. | elegant manner.
+| def plot_graph(self) -> None | This method plots the graph, if the nodes have a position, the nodes will be placed there, otherwise, they will be placed in a random butelegant  manner. |
         
 
 ### Dijkstra's Algorithm:
