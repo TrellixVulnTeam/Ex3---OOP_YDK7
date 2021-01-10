@@ -144,3 +144,8 @@ class DiGraph(GraphInterface):
             self.mC += 1
             return True
         return False
+
+    def __eq__(self, other):
+        return self.nodes == other.nodes and self.edges == other.edges and \
+               self.inE == other.inE and self.outE == other.outE and \
+               self.sizeV == other.sizeV and self.sizeE == other.sizeE and self.mC == other.mC
