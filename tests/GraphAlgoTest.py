@@ -68,62 +68,6 @@ class MyTestCase(unittest.TestCase):
         g1 = self.ga.get_graph()
         self.assertEqual(g, g1)
 
-    def test_save_and_load1(self):
-        file_path10 = '../data/G_10_80_0.json'
-        file_path10_1 = '../data/G_10_80_1.json'
-        file_path10_2 = '../data/G_10_80_2.json'
-        file_path100 = '../data/G_100_800_0.json'
-        file_path100_1 = '../data/G_100_800_1.json'
-        file_path100_2 = '../data/G_100_800_2.json'
-        file_path1000 = '../data/G_1000_8000_0.json'
-        file_path1000_1 = '../data/G_1000_8000_1.json'
-        file_path1000_2 = '../data/G_1000_8000_2.json'
-        file_path10000 = '../data/G_10000_80000_0.json'
-        file_path10000_1 = '../data/G_10000_80000_1.json'
-        file_path10000_2 = '../data/G_10000_80000_2.json'
-        file_path20000 = '../data/G_20000_160000_0.json'
-        file_path20000_1 = '../data/G_20000_160000_1.json'
-        file_path20000_2 = '../data/G_20000_160000_2.json'
-        file_path30000 = '../data/G_30000_240000_0.json'
-        file_path30000_1 = '../data/G_30000_240000_1.json'
-        file_path30000_2 = '../data/G_30000_240000_2.json'
-        self.assertTrue(self.ga.load_from_json(file_path10))
-        self.assertTrue(self.ga.save_to_json("test10.json"))
-        self.assertTrue(self.ga.load_from_json(file_path10_1))
-        self.assertTrue(self.ga.save_to_json("test10_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path10_2))
-        self.assertTrue(self.ga.save_to_json("test10_2.json"))
-        self.assertTrue(self.ga.load_from_json(file_path100))
-        self.assertTrue(self.ga.save_to_json("test100.json"))
-        self.assertTrue(self.ga.load_from_json(file_path100_1))
-        self.assertTrue(self.ga.save_to_json("test100_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path100_2))
-        self.assertTrue(self.ga.save_to_json("test100_2.json"))
-        self.assertTrue(self.ga.load_from_json(file_path1000))
-        self.assertTrue(self.ga.save_to_json("test1000.json"))
-        self.assertTrue(self.ga.load_from_json(file_path1000_1))
-        self.assertTrue(self.ga.save_to_json("test1000_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path1000_2))
-        self.assertTrue(self.ga.save_to_json("test1000_2.json"))
-        self.assertTrue(self.ga.load_from_json(file_path10000))
-        self.assertTrue(self.ga.save_to_json("test10000.json"))
-        self.assertTrue(self.ga.load_from_json(file_path10000_1))
-        self.assertTrue(self.ga.save_to_json("test10000_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path10000_2))
-        self.assertTrue(self.ga.save_to_json("test10000_2.json"))
-        self.assertTrue(self.ga.load_from_json(file_path20000))
-        self.assertTrue(self.ga.save_to_json("test20000.json"))
-        self.assertTrue(self.ga.load_from_json(file_path20000_1))
-        self.assertTrue(self.ga.save_to_json("test20000_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path20000_2))
-        self.assertTrue(self.ga.save_to_json("test20000_2.json"))
-        self.assertTrue(self.ga.load_from_json(file_path30000))
-        self.assertTrue(self.ga.save_to_json("test30000.json"))
-        self.assertTrue(self.ga.load_from_json(file_path30000_1))
-        self.assertTrue(self.ga.save_to_json("test30000_1.json"))
-        self.assertTrue(self.ga.load_from_json(file_path30000_2))
-        self.assertTrue(self.ga.save_to_json("test30000_2.json"))
-
     def test_shortest_dist(self):
         graph = GraphAlgo(DiGraph())
         graph.get_graph().add_node(0)
@@ -200,16 +144,106 @@ class MyTestCase(unittest.TestCase):
         file_path1 = '../data/G_10_80_2.json'
         graph = GraphAlgo()
         graph.load_from_json(file_path)
-        self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                                                         10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                                         20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-                                                         30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-                                                         40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-                                                         50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-                                                         60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
-                                                         70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
-                                                         80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-                                                         90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+        self.assertEqual(graph.connected_components(), [[0,
+                                                         16,
+                                                         40,
+                                                         59,
+                                                         89,
+                                                         3,
+                                                         34,
+                                                         54,
+                                                         57,
+                                                         86,
+                                                         88,
+                                                         2,
+                                                         8,
+                                                         14,
+                                                         19,
+                                                         27,
+                                                         29,
+                                                         44,
+                                                         70,
+                                                         77,
+                                                         91,
+                                                         10,
+                                                         33,
+                                                         42,
+                                                         45,
+                                                         46,
+                                                         58,
+                                                         64,
+                                                         75,
+                                                         83,
+                                                         21,
+                                                         32,
+                                                         37,
+                                                         67,
+                                                         71,
+                                                         94,
+                                                         99,
+                                                         39,
+                                                         48,
+                                                         78,
+                                                         80,
+                                                         85,
+                                                         6,
+                                                         41,
+                                                         52,
+                                                         69,
+                                                         97,
+                                                         24,
+                                                         56,
+                                                         65,
+                                                         22,
+                                                         36,
+                                                         51,
+                                                         55,
+                                                         18,
+                                                         25,
+                                                         28,
+                                                         47,
+                                                         74,
+                                                         12,
+                                                         63,
+                                                         98,
+                                                         23,
+                                                         50,
+                                                         84,
+                                                         13,
+                                                         15,
+                                                         17,
+                                                         53,
+                                                         66,
+                                                         5,
+                                                         35,
+                                                         61,
+                                                         92,
+                                                         43,
+                                                         62,
+                                                         87,
+                                                         7,
+                                                         26,
+                                                         4,
+                                                         49,
+                                                         30,
+                                                         76,
+                                                         81,
+                                                         95,
+                                                         31,
+                                                         60,
+                                                         1,
+                                                         90,
+                                                         96,
+                                                         38,
+                                                         82,
+                                                         93,
+                                                         20,
+                                                         11,
+                                                         9,
+                                                         72,
+                                                         68,
+                                                         79,
+                                                         73]])
         # graph.load_from_json(file_path1)
         # self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
 

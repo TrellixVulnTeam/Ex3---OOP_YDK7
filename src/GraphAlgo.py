@@ -175,17 +175,19 @@ class GraphAlgo(GraphAlgoInterface):
         q = [id1]
         nodes[id1] = True
         comps = [id1]
-        while neighs:
+        while q:
             curr = q.pop()
             if invert:
-                neighs = self.g.all_in_edges_of_node(curr).keys()
+                neighs = self.g.all_in_edges_of_node(curr)
             else:
-                neighs = self.g.all_out_edges_of_node(curr).keys()
-            for i in neighs:
-                if not nodes[i]:
-                    nodes[i] = True
-                    q.append(nodes[i])
-                    comps.append(nodes[i])
+                neighs = self.g.all_out_edges_of_node(curr)
+            if neighs is not None:
+                neighs = neighs.keys()
+                for i in neighs:
+                    if not nodes[i]:
+                        nodes[i] = True
+                        q.append(i)
+                        comps.append(i)
         return comps
 
     def connected_component(self, id1: int) -> list:
@@ -196,10 +198,14 @@ class GraphAlgo(GraphAlgoInterface):
         """
         if self.g is not None:
             nodes = self.g.get_all_v()
+            comp1 = self.bfs_search(id1, True)
+            comp2 = self.bfs_search(id1, False)
+
             if id1 not in nodes.keys():
                 return []
             else:
-                return list(self.bfs_search(id1, True) & self.bfs_search(id1, False))
+
+                return list(set(comp1) & set(comp2))
         else:
             return None
 
@@ -211,11 +217,11 @@ class GraphAlgo(GraphAlgoInterface):
         if self.g is not None:
             nodes = self.g.get_all_v()
             all_connected = []
-            for n in nodes.keys():
+            key_set = [*nodes.keys()]
+            for n in key_set:
                 neighs = self.connected_component(n)
-                for x in all_connected:
-                    if n in x and n in neighs:
-                        neighs = None
+                for i in neighs:
+                    key_set.remove(i)
                 if neighs is not None:
                     all_connected.append(neighs)
             return all_connected
