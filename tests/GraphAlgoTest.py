@@ -1,6 +1,5 @@
 import unittest
 import random
-
 from GraphAlgo import GraphAlgo
 
 def setUp1():
@@ -91,6 +90,17 @@ class MyTestCase(unittest.TestCase):
         path = [0, 1, 2]
         self.assertEqual(graph.shortest_path(0, 2), (7, path))
 
+    def test_shortest_path1(self):
+        file_path = '../data/G_1000_8000_2.json'
+        graph = GraphAlgo()
+        graph.load_from_json(file_path)
+        self.assertEqual(graph.shortest_path(579, 821), (63.1757198022814, [579, 314, 41, 497, 821]))
+        file_path1 = '../data/G_30000_240000_1.json'
+        graph.load_from_json(file_path1)
+        self.assertEqual(graph.shortest_path(10009, 25), (98.3231525358059, [10009, 13860, 6357, 14834,
+                                                                             12949, 27071, 15176, 26170,
+                                                                             20714, 14763, 15235, 4750, 25]))
+
     def test_connected_component(self):
         graph = GraphAlgo()
         graph.get_graph().add_node(0)
@@ -103,6 +113,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(graph.connected_component(3), [3])
         graph.get_graph().add_edge(2, 0, 6)
         self.assertEqual(graph.connected_component(0), [0, 1, 2])
+
+    def test_connected_component1(self):
+        file_path = '../data/G_10_80_1.json'
+        graph = GraphAlgo()
+        graph.load_from_json(file_path)
+        self.assertEqual(graph.connected_component(1), [1, 0, 2, 3, 4, 5, 6, 7, 8, 9])
+        graph.get_graph().add_edge(2, 0, 6)
+        self.assertEqual(graph.connected_component(0), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     def test_connected_components(self):
         graph = GraphAlgo()
@@ -119,6 +137,25 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(graph.connected_component(2), [2])
         graph.get_graph().add_edge(2, 0, 6)
         self.assertEqual(graph.connected_components(), [[0, 1, 2], [3]])
+
+    def test_connected_components1(self):
+        file_path = '../data/G_100_800_2.json'
+        file_path1 = '../data/G_10_80_2.json'
+        graph = GraphAlgo()
+        graph.load_from_json(file_path)
+        self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                                                         10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                                         20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+                                                         30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                                                         40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+                                                         50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+                                                         60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                                                         70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+                                                         80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                                                         90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+        graph.load_from_json(file_path1)
+        self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+
 
 
 if __name__ == '__main__':
