@@ -1,5 +1,7 @@
 import unittest
 import random
+
+from DiGraph import DiGraph
 from GraphAlgo import GraphAlgo
 
 def setUp1():
@@ -24,12 +26,11 @@ class MyTestCase(unittest.TestCase):
         test_path = "../data/test_save.json"
         ga = GraphAlgo()
         self.assertTrue(ga.load_from_json(file_path))
-        ga.save_to_json(test_path)
+        self.assertTrue(ga.save_to_json(test_path))
         g = ga.get_graph()
-        ga1 = GraphAlgo()
-        self.assertTrue(ga1.load_from_json(test_path))
-        g1 = ga1.get_graph()
-        self.assertEqual(g, g1)
+        self.assertTrue(ga.load_from_json(test_path))
+        g1 = ga.get_graph()
+        self.assertTrue(g.__eq__(g1))
 
     def test_save_and_load(self):
         file_path1 = '../data/A0'
@@ -67,8 +68,64 @@ class MyTestCase(unittest.TestCase):
         g1 = self.ga.get_graph()
         self.assertEqual(g, g1)
 
+    def test_save_and_load1(self):
+        file_path10 = '../data/G_10_80_0.json'
+        file_path10_1 = '../data/G_10_80_1.json'
+        file_path10_2 = '../data/G_10_80_2.json'
+        file_path100 = '../data/G_100_800_0.json'
+        file_path100_1 = '../data/G_100_800_1.json'
+        file_path100_2 = '../data/G_100_800_2.json'
+        file_path1000 = '../data/G_1000_8000_0.json'
+        file_path1000_1 = '../data/G_1000_8000_1.json'
+        file_path1000_2 = '../data/G_1000_8000_2.json'
+        file_path10000 = '../data/G_10000_80000_0.json'
+        file_path10000_1 = '../data/G_10000_80000_1.json'
+        file_path10000_2 = '../data/G_10000_80000_2.json'
+        file_path20000 = '../data/G_20000_160000_0.json'
+        file_path20000_1 = '../data/G_20000_160000_1.json'
+        file_path20000_2 = '../data/G_20000_160000_2.json'
+        file_path30000 = '../data/G_30000_240000_0.json'
+        file_path30000_1 = '../data/G_30000_240000_1.json'
+        file_path30000_2 = '../data/G_30000_240000_2.json'
+        self.assertTrue(self.ga.load_from_json(file_path10))
+        self.assertTrue(self.ga.save_to_json("test10.json"))
+        self.assertTrue(self.ga.load_from_json(file_path10_1))
+        self.assertTrue(self.ga.save_to_json("test10_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path10_2))
+        self.assertTrue(self.ga.save_to_json("test10_2.json"))
+        self.assertTrue(self.ga.load_from_json(file_path100))
+        self.assertTrue(self.ga.save_to_json("test100.json"))
+        self.assertTrue(self.ga.load_from_json(file_path100_1))
+        self.assertTrue(self.ga.save_to_json("test100_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path100_2))
+        self.assertTrue(self.ga.save_to_json("test100_2.json"))
+        self.assertTrue(self.ga.load_from_json(file_path1000))
+        self.assertTrue(self.ga.save_to_json("test1000.json"))
+        self.assertTrue(self.ga.load_from_json(file_path1000_1))
+        self.assertTrue(self.ga.save_to_json("test1000_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path1000_2))
+        self.assertTrue(self.ga.save_to_json("test1000_2.json"))
+        self.assertTrue(self.ga.load_from_json(file_path10000))
+        self.assertTrue(self.ga.save_to_json("test10000.json"))
+        self.assertTrue(self.ga.load_from_json(file_path10000_1))
+        self.assertTrue(self.ga.save_to_json("test10000_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path10000_2))
+        self.assertTrue(self.ga.save_to_json("test10000_2.json"))
+        self.assertTrue(self.ga.load_from_json(file_path20000))
+        self.assertTrue(self.ga.save_to_json("test20000.json"))
+        self.assertTrue(self.ga.load_from_json(file_path20000_1))
+        self.assertTrue(self.ga.save_to_json("test20000_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path20000_2))
+        self.assertTrue(self.ga.save_to_json("test20000_2.json"))
+        self.assertTrue(self.ga.load_from_json(file_path30000))
+        self.assertTrue(self.ga.save_to_json("test30000.json"))
+        self.assertTrue(self.ga.load_from_json(file_path30000_1))
+        self.assertTrue(self.ga.save_to_json("test30000_1.json"))
+        self.assertTrue(self.ga.load_from_json(file_path30000_2))
+        self.assertTrue(self.ga.save_to_json("test30000_2.json"))
+
     def test_shortest_dist(self):
-        graph = GraphAlgo()
+        graph = GraphAlgo(DiGraph())
         graph.get_graph().add_node(0)
         graph.get_graph().add_node(1)
         graph.get_graph().add_node(2)
@@ -79,7 +136,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(graph.shortest_path_dist(0, 2), 7)
 
     def test_shortest_path(self):
-        graph = GraphAlgo()
+        graph = GraphAlgo(DiGraph())
         graph.get_graph().add_node(0)
         graph.get_graph().add_node(1)
         graph.get_graph().add_node(2)
@@ -102,7 +159,7 @@ class MyTestCase(unittest.TestCase):
                                                                              20714, 14763, 15235, 4750, 25]))
 
     def test_connected_component(self):
-        graph = GraphAlgo()
+        graph = GraphAlgo(DiGraph())
         graph.get_graph().add_node(0)
         graph.get_graph().add_node(1)
         graph.get_graph().add_node(2)
@@ -123,7 +180,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(graph.connected_component(0), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     def test_connected_components(self):
-        graph = GraphAlgo()
+        graph = GraphAlgo(DiGraph())
         graph.get_graph().add_node(0)
         graph.get_graph().add_node(1)
         graph.get_graph().add_node(2)
@@ -153,8 +210,9 @@ class MyTestCase(unittest.TestCase):
                                                          70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
                                                          80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
                                                          90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
-        graph.load_from_json(file_path1)
-        self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+        # graph.load_from_json(file_path1)
+        # self.assertEqual(graph.connected_components(), [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+
 
 
 

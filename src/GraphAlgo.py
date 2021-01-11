@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 
 class GraphAlgo(GraphAlgoInterface):
 
-    def __init__(self, graph : DiGraph = None):
+    def __init__(self, graph: DiGraph = None):
         self.g = graph
 
-    def get_graph(self) -> GraphInterface:
+    def get_graph(self) -> DiGraph:
         """
         :return: the directed graph on which the algorithm works on.
         """
@@ -118,8 +118,9 @@ class GraphAlgo(GraphAlgoInterface):
         nodes[id1].set_weight(0)
         neighs = PriorityQueue()
         for n in edges.keys():
-            nodes[n].set_weight(edges[n])
-            neighs.put(PriorityNode(nodes[n].get_weight(), nodes[n]))
+            if n != id1:
+                nodes[n].set_weight(edges[n])
+                neighs.put(PriorityNode(nodes[n].get_weight(), nodes[n]))
         while not neighs.empty():
             n = neighs.get()
             node = n.get_item()
@@ -181,6 +182,13 @@ class GraphAlgo(GraphAlgoInterface):
             return neighbors
         else:
             return None
+
+    def BFS(self, id: int, invert: bool):
+
+        if invert:
+            neighs = self.g.all_out_edges_of_node(id)
+        else:
+            neighs = self.g.all_in_edges_of_node(id)
 
     def connected_components(self) -> List[list]:
         """

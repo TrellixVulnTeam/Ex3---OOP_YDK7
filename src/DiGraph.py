@@ -146,7 +146,7 @@ class DiGraph(GraphInterface):
             return True
         return False
 
-    def __eq__(self, other):
-        return self.nodes == other.nodes and self.edges == other.edges and \
-               self.inE == other.inE and self.outE == other.outE and \
-               self.sizeV == other.sizeV and self.sizeE == other.sizeE and self.mC == other.mC
+    def __eq__(self, other: object):
+        return self.nodes.keys() == other.nodes.keys() and self.edges.keys() == other.edges.keys() and\
+               self.inE.keys() == other.inE.keys() and self.outE.keys() == other.outE.keys() and\
+               self.sizeV == other.sizeV and self.sizeE == other.sizeE
