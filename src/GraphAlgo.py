@@ -164,6 +164,30 @@ class GraphAlgo(GraphAlgoInterface):
         else:
             return math.inf, None
 
+    def bfs_search(self, id1: int, invert: bool) -> list:
+        """
+        using the BFS algorithm to get the nodes connected in the graph.
+        @param id1: The node id
+        @param invert: the way we search in the graph (if True then inverted way, else regularly)
+        @return: The list of nodes in the SCC
+        """
+        nodes = {visited: False for visited in self.g.get_all_v().keys()}
+        q = [id1]
+        nodes[id1] = True
+        comps = [id1]
+        while neighs:
+            curr = q.pop()
+            if invert:
+                neighs = self.g.all_in_edges_of_node(curr).keys()
+            else:
+                neighs = self.g.all_out_edges_of_node(curr).keys()
+            for i in neighs:
+                if not nodes[i]:
+                    nodes[i] = True
+                    q.append(nodes[i])
+                    comps.append(nodes[i])
+        return comps
+
     def connected_component(self, id1: int) -> list:
         """
         Finds the Strongly Connected Component(SCC) that node id1 is a part of.
@@ -174,21 +198,10 @@ class GraphAlgo(GraphAlgoInterface):
             nodes = self.g.get_all_v()
             if id1 not in nodes.keys():
                 return []
-            neighbors = [id1]
-            for n in nodes.keys():
-                if self.shortest_path_dist(id1, n) != -1 and self.shortest_path_dist(n, id1) != -1:
-                    if self.shortest_path_dist(id1, n) != 0:
-                        neighbors.append(n)
-            return neighbors
+            else:
+                return list(self.bfs_search(id1, True) & self.bfs_search(id1, False))
         else:
             return None
-
-    def BFS(self, id: int, invert: bool):
-
-        if invert:
-            neighs = self.g.all_out_edges_of_node(id)
-        else:
-            neighs = self.g.all_in_edges_of_node(id)
 
     def connected_components(self) -> List[list]:
         """

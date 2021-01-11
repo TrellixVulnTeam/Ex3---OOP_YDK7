@@ -32,7 +32,10 @@ class DiGraph(GraphInterface):
         """
         return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
         """
-        return self.nodes
+        if self is not None:
+            return self.nodes
+        else:
+            return None
 
     def all_in_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected to (into) node_id ,
