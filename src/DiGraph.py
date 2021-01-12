@@ -32,10 +32,10 @@ class DiGraph(GraphInterface):
         """
         return a dictionary of all the nodes in the Graph, each node is represented using a pair  (key, node_data)
         """
-        if self is not None:
+        if self.nodes is not None:
             return self.nodes
         else:
-            return None
+            return {}
 
     def all_in_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected to (into) node_id ,
@@ -44,7 +44,7 @@ class DiGraph(GraphInterface):
         if id1 in self.inE.keys():
             return self.inE[id1]
         else:
-            return None
+            return {}
 
     def all_out_edges_of_node(self, id1: int) -> dict:
         """return a dictionary of all the nodes connected from node_id , each node is represented using a pair (key,
@@ -53,7 +53,7 @@ class DiGraph(GraphInterface):
         if id1 in self.outE.keys():
             return self.outE[id1]
         else:
-            return None
+            return {}
 
     def get_mc(self) -> int:
         """
