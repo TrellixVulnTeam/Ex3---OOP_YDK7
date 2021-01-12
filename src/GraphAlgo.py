@@ -8,6 +8,7 @@ from queue import PriorityQueue
 from PriorityNode import PriorityNode
 from GraphInterface import GraphInterface
 import matplotlib.pyplot as plt
+from src.node import NodeData
 
 
 class GraphAlgo(GraphAlgoInterface):
@@ -37,8 +38,8 @@ class GraphAlgo(GraphAlgoInterface):
                     self.g.add_node(node.get("id"))
                 else:
                     position = str(node.get("pos")).split(",")
-                    position1 = ((position[0]), float(position[1]), 0.0)
-                    self.g.add_node(node.get("id"), position1)
+                    self.g.add_node(node.get("id"))
+                    self.g.nodes[node.get("id")].set_position(float(position[0]), float(position[1]))
             for edge in edges_load:
                 src = edge.get("src")
                 w = edge.get("w")
@@ -220,7 +221,8 @@ class GraphAlgo(GraphAlgoInterface):
             for n in key_set:
                 neighs = self.connected_component(n)
                 for i in neighs:
-                    key_set.remove(i)
+                    if i != n:
+                        key_set.remove(i)
                 if neighs is not None:
                     all_connected.append(neighs)
             return all_connected
@@ -236,15 +238,33 @@ class GraphAlgo(GraphAlgoInterface):
         """
         nodes = self.g.get_all_v()
         node_list = [*nodes.values()]
+
         for node in node_list:
             comp1 = self.connected_component(node.get_key())
             for node2 in comp1:
                 if nodes[node2].get_position() is None:
-                    self.g.nodes[node2].set_position(random.uniform(30, 40), random.uniform(30, 40))
+                    nodes[node2].set_position(random.uniform(30, 40), random.uniform(30, 40))
                 pos = nodes[node2].get_position()
                 plt.scatter(pos[0], pos[1], color='red')
-                node_list.remove(nodes[node2])
-
+                if node2 != node.get_key():
+                    node_list.remove(nodes[node2])
+        for node in nodes.keys():
+            if self.g.all_out_edges_of_node(node) is not None:
+                for edges in self.g.all_out_edges_of_node(node).keys():
+                    if node != edges:
+                        pos1 = nodes[node].get_position()
+                        pos2 = nodes[edges].get_position()
+                        x1 = pos1[0]
+                        y1 = pos1[1]
+                        x2 = pos2[0]
+                        y2 = pos2[1]
+                        delta_x = (x1 - x2)/math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+                        delta_y = (y1 - y2)/math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+                        rin = 0.0001
+                        x1 = delta_x * (-rin) + x1
+                        y1 = delta_y * (-rin) + y1
+                        x2 = delta_x * rin + x2
+                        y2 = delta_y * rin + y2
+                        plt.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.000000003,
+                                  head_width=0.0002)
         plt.show()
-
-
