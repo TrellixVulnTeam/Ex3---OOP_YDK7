@@ -204,7 +204,6 @@ class GraphAlgo(GraphAlgoInterface):
             if id1 not in nodes.keys():
                 return []
             else:
-
                 return list(set(comp1) & set(comp2))
         else:
             return None
@@ -235,4 +234,17 @@ class GraphAlgo(GraphAlgoInterface):
         Otherwise, they will be placed in a random but elegant manner.
         @return: None
         """
-        pass
+        nodes = self.g.get_all_v()
+        node_list = [*nodes.values()]
+        for node in node_list:
+            comp1 = self.connected_component(node.get_key())
+            for node2 in comp1:
+                if nodes[node2].get_position() is None:
+                    self.g.nodes[node2].set_position(random.uniform(30, 40), random.uniform(30, 40))
+                pos = nodes[node2].get_position()
+                plt.scatter(pos[0], pos[1], color='red')
+                node_list.remove(nodes[node2])
+
+        plt.show()
+
+

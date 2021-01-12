@@ -1,6 +1,6 @@
 class NodeData:
 
-    def __init__(self, key: int, position: None):
+    def __init__(self, key: int, position: tuple = None):
         self.key = key
         self.position = position
         self.weight = 0.0
@@ -31,3 +31,9 @@ class NodeData:
 
     def get_weight(self) -> float:
         return self.weight
+
+    def get_position(self) -> tuple:
+        return self.position
+
+    def set_position(self, x: float, y: float) -> None:
+        self.position = (x, y, 0)
