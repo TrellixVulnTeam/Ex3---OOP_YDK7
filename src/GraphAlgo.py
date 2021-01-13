@@ -258,13 +258,6 @@ class GraphAlgo(GraphAlgoInterface):
                         y1 = pos1[1]
                         x2 = pos2[0]
                         y2 = pos2[1]
-                        delta_x = (x1 - x2)/math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
-                        delta_y = (y1 - y2)/math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
-                        rin = 0.0001
-                        x1 = delta_x * (-rin) + x1
-                        y1 = delta_y * (-rin) + y1
-                        x2 = delta_x * rin + x2
-                        y2 = delta_y * rin + y2
                         plt.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.000000003,
                                   head_width=0.0002)
         plt.show()
