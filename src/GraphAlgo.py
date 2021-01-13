@@ -245,7 +245,7 @@ class GraphAlgo(GraphAlgoInterface):
                 if nodes[node2].get_position() is None:
                     nodes[node2].set_position(random.uniform(30, 40), random.uniform(30, 40))
                 pos = nodes[node2].get_position()
-                plt.scatter(pos[0], pos[1], color='red')
+                plt.scatter(pos[0], pos[1], color='c')
                 if node2 != node.get_key():
                     node_list.remove(nodes[node2])
         for node in nodes.keys():
@@ -259,5 +259,7 @@ class GraphAlgo(GraphAlgoInterface):
                         x2 = pos2[0]
                         y2 = pos2[1]
                         plt.arrow(x1, y1, (x2 - x1), (y2 - y1), length_includes_head=True, width=0.000000003,
-                                  head_width=0.0002)
+                                  head_width=0.0002, color = 'black')
+
+        plt.title("My Graph", color = "c")
         plt.show()
