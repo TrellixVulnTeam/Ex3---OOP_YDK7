@@ -15,6 +15,6 @@ Dijkstra work by getting 2 nodes - source node and destination node. The algorit
 
 
 ## BFS Algorithm:
-BFS should be run over all the nodes in the graph, if so we got that the graph is connected. This algorithm will be used in the function connected_component. If the algorithm over all the nodes, so it return true, else, it return false.
+BFS runs over all connected nodes (without prioritizing by an order) and marks them as visited. In our projects, the BFS algorithm returns a list of all the nodes it went through, to use in connected component method.
 
 ![Level-based_BFS_example](https://user-images.githubusercontent.com/73074680/104475914-530b4600-55c8-11eb-8f7c-bb875f207ebf.gif)
