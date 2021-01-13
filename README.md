@@ -3,61 +3,18 @@
 ## Our project
 In this project we presents an implementation of a directed weighted graph using Python.
 
-# Classes
+## Main algorithms in our project
+**shortest_path** - This method calculate the shortest path from one node to other node, using Dijkstra's algorithm.
+**connected_component** - This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC.
+**connected_components** - This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC.
 
-## NodeData:
-
-This class is an auxiliary class for DiGraph and GraphAlgo classes.
-
-## DiGraph:
-This class implements a directed weighted graph.
-
-
-![Example for a DiGraph:](https://ucarecdn.com/d624d487-da51-42ad-a520-cc3fb8f253bd/)
-
-### Objects:
-**nodes** - Dictionary of nodes in the graph.
-
-**edges** - Dictionary of all the edges in the graph.
-
-**inE** - Dictionary of all the nodes that that get an edge from other node.
-
-**outE** - Dictionary of all the nodes that com out to other node.
-
-**sizeV** - The number of nodes in the graph.
-
-**sizeE** - The number of edges in the graph.
-
-| Main methods | Explanation |
-|------------  | ------------|
-| v_size(self) -> int | Return the number of nodes in the graph. |
-| e_size(self) -> int | Return the number of edges in the graph. |
-| get_all_v(self) -> dict | Return all the nodes in the graph. |
-| all_in_edges_of_node(self, id1: int) -> dict | Return all the edges that come in to a specific node. |
-| all_out_edges_of_node(self, id1: int) -> dict | Return all the edges that come out from a specific node. |
-| get_mc(self) -> int | Return the mode count of the graph. |
-| add_edge(self, id1: int, id2: int, weight: float) -> bool | Add some edge to the graph between two nodes, return true if it success, else return false. |
-| add_node(self, node_id: int, pos: tuple = None) -> bool | Add some node to the graph, return true if it success, else return false. |
-| remove_node(self, node_id: int) -> bool | Remove a specific node from the graph, return true if it success, else return false. |
-| remove_edge(self, node_id1: int, node_id2: int) -> bool | Remove edge between two nodes, return true if it success, else return false. |
-
-## GraphAlgo:
-This class implements algorithms of a DiGraph.
-
-**g** - A DiGraph.
-
-| Main methods | Explanation |
-|------------  | -------------|
-| get_graph(self) -> GraphInterface  | This method return the directed graph on which the algorithm works on.             |
-| load_from_json(self, file_name: str) -> bool| This method loads a graph from a json file, return True if the loading was successful, False o.w. |
-| save_to_json(self, file_name: str) -> bool | This method saves the graph in JSON format to a file, return True if the save was successful, False o.w. |
-| def shortest_path(self, id1: int, id2: int) -> (float, list) | This method calculate the shortest path from one node to other node, using Dijkstra's algorithm. |
-| def connected_component(self, id1: int) -> list | This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC. |
-| def connected_components(self) -> List[list] | This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC. |
-| def plot_graph(self) -> None | This method plots the graph, if the nodes have a position, the nodes will be placed there, otherwise, they will be placed in a random butelegant  manner. |
-        
-
-### Dijkstra's Algorithm:
+## Dijkstra's Algorithm:
+Dijkstra work by getting 2 nodes - source node and destination node. The algorithm should get from the src node to the dest node and go through the nodes with the lowest weight. The algorithm works as follows: We will first initialize all the weights of the nodes to infinity so that we know which node we have not yet updated, and then we set a priority queue that will contain the nodes we will visit and update their weights. we enter the first node and initialize its weight to 0, and all the other nodes in the graph are initialized to infinity. For the current junction, we will include all its neighbors and update their temporary weights. The weight of each node is updated according to the parent weight of that node plus the distance between them which is the weight on the edge. Then the same node we started with becomes the father of this node and leaves the queue, it is marked as one we have already visited and we will not return to it again. when the algorithm is finished we get the shortest path betweeen these nodes. we get it as shortest_path which give us the actual number it will take to travel from sec to dest. and we get is as shortest_path which will give us the path from src to dest by nodes we have to go.
 
 ![dWtprX5](https://user-images.githubusercontent.com/73074680/104013765-988bd580-51ba-11eb-9d11-524e8431ece6.gif)
 
+
+## BFS Algorithm:
+BFS should be run over all the nodes in the graph, if so we got that the graph is connected. This algorithm will be used in the function connected_component. If the algorithm over all the nodes, so it return true, else, it return false.
+
+![Level-based_BFS_example](https://user-images.githubusercontent.com/73074680/104475914-530b4600-55c8-11eb-8f7c-bb875f207ebf.gif)
