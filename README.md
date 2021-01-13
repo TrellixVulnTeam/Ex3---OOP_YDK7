@@ -4,8 +4,11 @@
 In this project we presents an implementation of a directed weighted graph using Python.
 
 ## Main algorithms in our project
+
 **shortest_path** - This method calculate the shortest path from one node to other node, using Dijkstra's algorithm.
+
 **connected_component** - This merthod finds the Strongly Connected Component(SCC) that node id1 is a part of, return the list of nodes in the SCC.
+
 **connected_components** - This method finds all the Strongly Connected Component(SCC) in the graph, return the list all SCC.
 
 ## Dijkstra's Algorithm:
