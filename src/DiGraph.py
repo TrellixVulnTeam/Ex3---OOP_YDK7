@@ -113,20 +113,18 @@ class DiGraph(GraphInterface):
         if node_id in self.nodes.keys():
             for n in self.inE.keys():
                 if node_id in self.inE[n].keys():
-                    # del self.inE[n][node_id]
-                    # self.sizeE -= 1
-                    self.remove_edge(node_id, n)
+                    del self.inE[n][node_id]
+                    self.sizeE -= 1
             for n in self.outE.keys():
                 if node_id in self.outE[n].keys():
-                    # del self.outE[n][node_id]
-                    # self.sizeE -= 1
-                    self.remove_edge(n, node_id)
+                    del self.outE[n][node_id]
+                    self.sizeE -= 1
             del self.nodes[node_id]
             del self.edges[node_id]
-            # if node_id in self.inE.keys():
-            #     del self.inE[node_id]
-            # if node_id in self.inE.keys():
-            #     del self.outE[node_id]
+            if node_id in self.inE.keys():
+                del self.inE[node_id]
+            if node_id in self.inE.keys():
+                del self.outE[node_id]
             self.sizeV -= 1
             self.mC += 1
             return True

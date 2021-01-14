@@ -51,6 +51,7 @@ class DiGraphTest(unittest.TestCase):
     def test_add_edge(self):
         g = set_Digraph()
         g.add_edge(3, 9, 5)
+        self.assertFalse(g.add_edge(3, 9, 6))
         self.assertEqual(6, g.e_size())
 
     def test_add_node(self):
@@ -63,6 +64,7 @@ class DiGraphTest(unittest.TestCase):
         g = set_Digraph()
         g.remove_node(1)
         self.assertEqual(3, g.sizeV)
+        self.assertEqual(g.get_mc(), 11)
 
     def test_remove_edge(self):
         g = set_Digraph()
